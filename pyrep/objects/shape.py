@@ -228,6 +228,15 @@ class Shape(Object):
         sim.simSetShapeColor(
             self._handle, None, sim.sim_colorcomponent_ambient_diffuse, color)
 
+    def set_opacity(self, opacity: float) -> None:
+        """Sets the opacity of the shape.
+
+        :param color: The opacity of the shape (0: transparent, 1: opaque).
+        :return:
+        """
+        sim.simSetShapeColor(
+            self._handle, None, sim.sim_colorcomponent_transparency, [opacity])
+
     def get_mass(self) -> float:
         """Gets the mass of the shape.
 
