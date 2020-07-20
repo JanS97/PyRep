@@ -860,6 +860,17 @@ def simGetSimulationTimeStep():
     return step
 
 
+def simGetSimulationPassesPerRenderingPass():
+    ppf = lib.simGetSimulationPassesPerRenderingPass()
+    _check_return(ppf)
+    return ppf
+
+
+def simSetSimulationPassesPerRenderingPass(ppf: int):
+    ret = lib.simSetSimulationPassesPerRenderingPass(ppf)
+    _check_return(ret)
+
+
 def simResetDynamicObject(objectHandle):
     ret = lib.simResetDynamicObject(objectHandle)
     _check_return(ret)

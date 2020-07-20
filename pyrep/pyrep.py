@@ -252,6 +252,25 @@ class PyRep(object):
         """
         return sim.simGetSimulationTimeStep()
 
+    def set_simulation_passes_per_rendering_pass(self, ppf: int) -> None:
+        """Sets the number of simulation passes per rendering pass.
+
+        :param ppf: Number of simulation passes per rendering pass.
+        """
+        sim.simSetSimulationPassesPerRenderingPass(ppf)
+        if not np.allclose(self.get_simulation_passes_per_rendering_pass(), ppf):
+            warnings.warn('Could not change the number of simulation passes '
+                          'per rendering pass. You may need to change it the '
+                          'time step to "custom dt" using simulation settings '
+                          'dialog.')
+
+    def get_simulation_passes_per_rendering_pass(self) -> float:
+        """Gets the number of simulation passes per rendering pass.
+
+        :return: Number of simulation passes per rendering pass.
+        """
+        return sim.simGetSimulationPassesPerRenderingPass()
+
     def set_configuration_tree(self, config_tree: bytes) -> None:
         """Restores configuration information previously retrieved.
 
