@@ -590,10 +590,11 @@ def simCreateDummy(size, color):
     return ret
 
 
-def simGetObjectVelocity(objectHandle):
+def simGetObjectVelocity(objectHandle, regular_angular_velocity):
     linearVel = ffi.new('float[3]')
     angularVel = ffi.new('float[3]')
-    ret = lib.simGetObjectVelocity(objectHandle, linearVel, angularVel)
+    flags = sim_handleflag_axis if regular_angular_velocity else 0
+    ret = lib.simGetObjectVelocity(objectHandle | flags, linearVel, angularVel)
     _check_return(ret)
     return list(linearVel), list(angularVel)
 

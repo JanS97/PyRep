@@ -251,12 +251,17 @@ class Object(object):
         self.set_position(pose[:3], relative_to, reset_dynamics)
         self.set_quaternion(pose[3:], relative_to, reset_dynamics)
 
-    def get_velocity(self) -> Tuple[np.ndarray, np.ndarray]:
+    def get_velocity(self, regular_angular_velocity: bool = False) -> Tuple[np.ndarray, np.ndarray]:
         """Get the velocity of this object.
+
+        :param regular_angular_velocity: Whether to return the regular angular
+            velocity (i.e. the rotation axis and the rotation velocity that is
+            represented by the axis' length) instead of the angular velocity
+            around the axes.
 
         :return: A pair of linear and angular velocity.
         """
-        linear_vel, angular_vel = sim.simGetObjectVelocity(self._handle)
+        linear_vel, angular_vel = sim.simGetObjectVelocity(self._handle, regular_angular_velocity)
         linear_vel = np.array(linear_vel, dtype=np.float64)
         angular_vel = np.array(angular_vel, dtype=np.float64)
         return linear_vel, angular_vel
